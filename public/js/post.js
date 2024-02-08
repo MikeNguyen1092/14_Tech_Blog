@@ -1,4 +1,3 @@
-document.querySelector("#post-form").addEventListener("submit", handleFormSubmit);
 const handleFormSubmit = async (event) => {
 	event.preventDefault();
 
@@ -8,11 +7,9 @@ const handleFormSubmit = async (event) => {
 	const postData = {
 		title,
 		content,
-
 	};
 
 	try {
-
 		const response = await fetch("/api/posts", {
 			method: "POST",
 			headers: {
@@ -22,18 +19,13 @@ const handleFormSubmit = async (event) => {
 		});
 
 		if (response.ok) {
-
 			console.log("Post submitted successfully");
-
 		} else {
-
 			console.error("Failed to submit post");
 		}
 	} catch (error) {
-
 		console.error("Fetch error:", error);
 	}
 };
 
-
-
+document.querySelector("#post-form").addEventListener("submit", handleFormSubmit);

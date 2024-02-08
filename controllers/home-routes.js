@@ -1,14 +1,14 @@
 const router = require("express").Router();
-const {Blog} = require("../models");
+const { Post } = require("../models");
 
 const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
 	try {
-		const dbBlogData = await Blog.findAll();
-		const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
+		const dbPostData = await Post.findAll();
+		const posts = dbPostData.map((Post) => Post.get({ plain: true }));
 		res.render("homepage", {
-			blogs,
+			posts,
 			loggedIn: req.session.loggedIn,
 		});
 	} catch (err) {
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.get("/blog/:id", withAuth, async (req, res) => {
+router.get("/Post/:id", withAuth, async (req, res) => {
 	// If the user is not logged in, redirect the user to the login page
 	try {
 		const dbGalleryData = await Gallery.findByPk(req.params.id, {
